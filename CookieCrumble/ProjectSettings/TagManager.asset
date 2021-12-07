@@ -17,6 +17,7 @@ TagManager:
   - brown
   - vanillaBlock
   - border
+  - vert
   layers:
   - Default
   - TransparentFX

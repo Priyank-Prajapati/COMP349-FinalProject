@@ -83,7 +83,6 @@ public class platformController : MonoBehaviour
           
             if (PlayerController.color == color)
             {
-                Debug.Log("boom boom");
                 this.GetComponent<Collider2D>().isTrigger = false;
                 c = true;
             }

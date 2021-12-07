@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public Sprite [] playerSprites;
     private Vector2 pos;
     bool pink, brown, vanilla;
+    public bool onVertPlatform;
     public static string color;
     int  scene_number;
     void Start()
@@ -150,6 +151,19 @@ public class PlayerController : MonoBehaviour
             pink = false;
             brown = true;
             vanilla = false;
+        }
+
+        if (collision.gameObject.CompareTag("vert"))
+        {
+            onVertPlatform = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("vert"))
+        {
+            onVertPlatform = false;
         }
     }
     private bool GroundCheck()
