@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPos; //ground check overlapcircle position
     [SerializeField] private float groundCheckRadius; //ground check overlapcircle radius
     [SerializeField] private LayerMask whatIsGround; //ground Layer Mask
-    public AudioSource coinSound,eatSound;
+    public AudioClip cakeSound,deadSound, jumpSound, completeSound, colorSwapsound, keySound;
+    public AudioSource audio;
     bool hasKey=false;
     Transform playerDefaultPostition;
     public Sprite playerSpriteRenderer;
@@ -32,8 +33,8 @@ public class PlayerController : MonoBehaviour
         rBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         pos = rBody.position;
-        coinSound = GetComponent<AudioSource>();
-        eatSound = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
+        
         playerSpriteRenderer = GetComponent<SpriteRenderer>().sprite;
         scene_number = SceneManager.GetActiveScene().buildIndex;
         
@@ -45,16 +46,28 @@ public class PlayerController : MonoBehaviour
         {
           if(pink)
             {
+                if (this.GetComponent<SpriteRenderer>().sprite != playerSprites[0])
+                {
+                    audio.PlayOneShot(colorSwapsound);
+                }
                 this.GetComponent<SpriteRenderer>().sprite = playerSprites[0];
                 color = "Pink";
             }
             else if (vanilla)
             {
+                if (this.GetComponent<SpriteRenderer>().sprite != playerSprites[1])
+                {
+                    audio.PlayOneShot(colorSwapsound);
+                }
                 this.GetComponent<SpriteRenderer>().sprite = playerSprites[1];
                 color = "Vanilla";
             }
             else if (brown)
             {
+                if (this.GetComponent<SpriteRenderer>().sprite != playerSprites[2])
+                {
+                    audio.PlayOneShot(colorSwapsound);
+                }
                 this.GetComponent<SpriteRenderer>().sprite = playerSprites[2];
                 color = "Brown";
             }
@@ -64,6 +77,7 @@ public class PlayerController : MonoBehaviour
         //jump code
         if (isGrounded && Input.GetAxis("Jump") > 0)
         {
+            audio.PlayOneShot(jumpSound);
             rBody.AddForce(new Vector2(5.0f, jumpForce));
         }
 
@@ -87,11 +101,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             ScoreCounter.scoreValue = ScoreCounter.scoreValue + 1;
-            coinSound.Play();
+            audio.PlayOneShot(cakeSound);
         }
         if (collision.gameObject.CompareTag("key"))
         {
-           
+            audio.PlayOneShot(keySound);
             Destroy(collision.gameObject);
             hasKey = true;
         }
@@ -101,17 +115,20 @@ public class PlayerController : MonoBehaviour
            
             if (hasKey)
             {
-                if(scene_number==2)
-                SceneManager.LoadScene(scene_number);
-                else
-                {
-                    scene_number++;
-                    SceneManager.LoadScene(scene_number);
-                }
+                audio.PlayOneShot(completeSound);
+                StartCoroutine(WaitAndLoadScene());
+                //if (scene_number==2)
+                //SceneManager.LoadScene(scene_number);
+                //else
+                //{
+                //    scene_number++;
+                //    SceneManager.LoadScene(scene_number);
+                //}
             }
         }
         if (collision.gameObject.CompareTag("sceneBorder"))
         {
+            audio.PlayOneShot(deadSound);
             LivesSystem.life = LivesSystem.life - 1;
             rBody.position = pos;
         }
@@ -160,12 +177,17 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("enemy"))
         {
             color = "";
-          
-            eatSound.Play();
+            audio.PlayOneShot(deadSound);
             LivesSystem.life = LivesSystem.life - 1;
             this.GetComponent<SpriteRenderer>().sprite=playerSpriteRenderer;
             rBody.position = pos;
             //Application.LoadLevel(Application.loadedLevel);
         }
+    }
+
+    IEnumerator WaitAndLoadScene()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(0);
     }
 }
