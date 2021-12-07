@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,27 +11,58 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPos; //ground check overlapcircle position
     [SerializeField] private float groundCheckRadius; //ground check overlapcircle radius
     [SerializeField] private LayerMask whatIsGround; //ground Layer Mask
-
+    public AudioSource coinSound,eatSound;
+    bool hasKey=false;
+    Transform playerDefaultPostition;
+    public SpriteRenderer playerSpriteRenderer;
     //private variable
     private Rigidbody2D rBody;
     private bool isGrounded = false;
     private Animator anim;
     private bool isFacingRight = true;
+    Color playerColor;
+    int i = 0;
+    public Sprite [] playerSprites;
+    private Vector2 pos;
+    bool pink, brown, vanilla;
+    public static string color;
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        pos = rBody.position;
+        coinSound = GetComponent<AudioSource>();
+        eatSound = GetComponent<AudioSource>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+      
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {
-        //check if on ground
-        isGrounded = GroundCheck();
+        if (Input.GetKey(KeyCode.F))
+        {
+          if(pink)
+            {
+                this.GetComponent<SpriteRenderer>().sprite = playerSprites[0];
+                color = "Pink";
+            }
+            else if (vanilla)
+            {
+                this.GetComponent<SpriteRenderer>().sprite = playerSprites[1];
+                color = "Vanilla";
+            }
+            else if (brown)
+            {
+                this.GetComponent<SpriteRenderer>().sprite = playerSprites[2];
+                color = "Brown";
+            }
+        }
+            //check if on ground
+            isGrounded = GroundCheck();
         //jump code
         if (isGrounded && Input.GetAxis("Jump") > 0)
         {
-            rBody.AddForce(new Vector2(0.0f, jumpForce));
+            rBody.AddForce(new Vector2(5.0f, jumpForce));
         }
 
         float horiz = Input.GetAxis("Horizontal");
@@ -47,7 +79,79 @@ public class PlayerController : MonoBehaviour
         //anim.SetFloat("ySpeed", Mathf.Abs(rBody.velocity.y));
         //anim.SetBool("isGrounded", isGrounded);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("coin"))
+        {
+            Destroy(collision.gameObject);
+            ScoreCounter.scoreValue = ScoreCounter.scoreValue + 1;
+            coinSound.Play();
+        }
+        if (collision.gameObject.CompareTag("key"))
+        {
+            Destroy(collision.gameObject);
+            hasKey = true;
+        }
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            eatSound.Play();
+            LivesSystem.life = LivesSystem.life - 1;
+            rBody.position = pos;
+            //Application.LoadLevel(Application.loadedLevel);
+        }
+        if (collision.gameObject.CompareTag("door"))
+        {
+            if(hasKey)
+            SceneManager.LoadScene("MainMenu");
+        }
+        if (collision.gameObject.CompareTag("colorStation"))
+        {
 
+            
+            if(i==0)
+            {
+                playerSpriteRenderer.color = Color.blue;
+                i=1;
+            }
+            else if(i ==1)
+            {
+                playerSpriteRenderer.color = Color.red;
+                i=2;
+            }
+            else if (i == 2)
+            {
+                playerSpriteRenderer.color = Color.green;
+                i = 0;
+            }
+            Debug.Log(playerSpriteRenderer.color);
+        }
+       
+        if (collision.gameObject.CompareTag("sceneBorder"))
+        {
+            LivesSystem.life = LivesSystem.life - 1;
+            rBody.position = pos;
+        }
+        if (collision.gameObject.CompareTag("pink"))
+        {
+            pink = true;
+            brown = false;
+            vanilla = false;
+                
+        }
+        if (collision.gameObject.CompareTag("vanilla"))
+        {
+            pink = false;
+            brown = false;
+            vanilla = true;
+        }
+        if (collision.gameObject.CompareTag("brown"))
+        {
+            pink = false;
+            brown = true;
+            vanilla = false;
+        }
+    }
+ 
     private bool GroundCheck()
     {
         return Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRadius, whatIsGround);
@@ -60,5 +164,12 @@ public class PlayerController : MonoBehaviour
         transform.localScale = temp;
 
         isFacingRight = !isFacingRight;
+    }
+    IEnumerator ColorChange()
+    {
+        yield return new WaitForSeconds(3);
+        Debug.Log("i");
+    
+
     }
 }
