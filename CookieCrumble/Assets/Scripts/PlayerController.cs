@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("key"))
         {
+           
             Destroy(collision.gameObject);
             hasKey = true;
         }
@@ -109,8 +110,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
-       
         if (collision.gameObject.CompareTag("sceneBorder"))
         {
             LivesSystem.life = LivesSystem.life - 1;
@@ -136,7 +135,6 @@ public class PlayerController : MonoBehaviour
             vanilla = false;
         }
     }
- 
     private bool GroundCheck()
     {
         return Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRadius, whatIsGround);
@@ -161,6 +159,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
+            color = "";
+          
             eatSound.Play();
             LivesSystem.life = LivesSystem.life - 1;
             this.GetComponent<SpriteRenderer>().sprite=playerSpriteRenderer;
