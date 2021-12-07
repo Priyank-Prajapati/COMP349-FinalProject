@@ -7,6 +7,7 @@ public class MenuPlay : MonoBehaviour
 {
    public void PlayGame()
     {
+        ScoreCounter.scoreValue = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
