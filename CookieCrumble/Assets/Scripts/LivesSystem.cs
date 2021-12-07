@@ -29,6 +29,7 @@ public class LivesSystem : MonoBehaviour
             Debug.Log(life);
             SceneManager.LoadScene("Level1");
             life = 3;
+            ScoreCounter.scoreValue = 0;
         }
     }
 }
