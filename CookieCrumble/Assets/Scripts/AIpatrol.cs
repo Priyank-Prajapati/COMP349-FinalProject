@@ -11,7 +11,7 @@ public class AIpatrol : MonoBehaviour
     public Rigidbody2D rb;
     public Transform groundCheckPos;
     public LayerMask groundLayer;
-
+    public Collider2D bodyCollider;
     void Start()
     {
         mustPatrol = true;
@@ -19,11 +19,11 @@ public class AIpatrol : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(mustPatrol)
+        if(mustPatrol )
         {
             mustTurn = !Physics2D.OverlapCircle(groundCheckPos.position, 0.1f, groundLayer);
         }
-
+        
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class AIpatrol : MonoBehaviour
     }
     void Patrol()
     {
-        if (mustTurn)
+        if (mustTurn || bodyCollider.IsTouchingLayers(groundLayer))
         {
             Flip();
         }
@@ -45,9 +45,12 @@ public class AIpatrol : MonoBehaviour
     }
     void Flip()
     {
+        mustTurn = false;
         mustPatrol = false;
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
         walkSpeed *= -1;
         mustPatrol = true;
+        
     }
+    
 }

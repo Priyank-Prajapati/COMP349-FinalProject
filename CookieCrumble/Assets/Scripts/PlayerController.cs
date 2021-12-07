@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource coinSound,eatSound;
     bool hasKey=false;
     Transform playerDefaultPostition;
-    public SpriteRenderer playerSpriteRenderer;
+    public Sprite playerSpriteRenderer;
     //private variable
     private Rigidbody2D rBody;
     private bool isGrounded = false;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 pos;
     bool pink, brown, vanilla;
     public static string color;
+    int  scene_number;
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -33,8 +34,9 @@ public class PlayerController : MonoBehaviour
         pos = rBody.position;
         coinSound = GetComponent<AudioSource>();
         eatSound = GetComponent<AudioSource>();
-        playerSpriteRenderer = GetComponent<SpriteRenderer>();
-      
+        playerSpriteRenderer = GetComponent<SpriteRenderer>().sprite;
+        scene_number = SceneManager.GetActiveScene().buildIndex;
+        
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -92,39 +94,22 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             hasKey = true;
         }
-        if (collision.gameObject.CompareTag("enemy"))
-        {
-            eatSound.Play();
-            LivesSystem.life = LivesSystem.life - 1;
-            rBody.position = pos;
-            //Application.LoadLevel(Application.loadedLevel);
-        }
+       
         if (collision.gameObject.CompareTag("door"))
         {
-            if(hasKey)
-            SceneManager.LoadScene("MainMenu");
+           
+            if (hasKey)
+            {
+                if(scene_number==2)
+                SceneManager.LoadScene(scene_number);
+                else
+                {
+                    scene_number++;
+                    SceneManager.LoadScene(scene_number);
+                }
+            }
         }
-        if (collision.gameObject.CompareTag("colorStation"))
-        {
-
-            
-            if(i==0)
-            {
-                playerSpriteRenderer.color = Color.blue;
-                i=1;
-            }
-            else if(i ==1)
-            {
-                playerSpriteRenderer.color = Color.red;
-                i=2;
-            }
-            else if (i == 2)
-            {
-                playerSpriteRenderer.color = Color.green;
-                i = 0;
-            }
-            Debug.Log(playerSpriteRenderer.color);
-        }
+        
        
         if (collision.gameObject.CompareTag("sceneBorder"))
         {
@@ -171,5 +156,16 @@ public class PlayerController : MonoBehaviour
         Debug.Log("i");
     
 
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            eatSound.Play();
+            LivesSystem.life = LivesSystem.life - 1;
+            this.GetComponent<SpriteRenderer>().sprite=playerSpriteRenderer;
+            rBody.position = pos;
+            //Application.LoadLevel(Application.loadedLevel);
+        }
     }
 }
