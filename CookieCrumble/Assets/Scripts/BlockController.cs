@@ -5,13 +5,15 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
     public bool pink, brown, vanilla;
-
+    public AudioClip respawnSound;
+    public AudioSource audio;
     public Vector3 initialPos;
 
     // Start is called before the first frame update
     void Start()
     {
         initialPos = this.transform.position;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,6 +22,7 @@ public class BlockController : MonoBehaviour
         if(this.transform.position.y <= -15)
         {
             this.transform.position = initialPos;
+            audio.PlayOneShot(respawnSound);
         }
     }
 

@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: vanilla
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5863823322275820722, guid: 4a16e30c3c7827240aa150cd6e333e81, type: 3}
+      propertyPath: respawnSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 780d2076a6ad3c84bba9c0a04025d48d, type: 3}
     - target: {fileID: 5863823322275820723, guid: 4a16e30c3c7827240aa150cd6e333e81, type: 3}
       propertyPath: m_Name
       value: VanillaDoubleBlock
@@ -67,5 +71,9 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -7785486706663002861, guid: 2a59dc48f9e192042ae8698732a13229, type: 3}
+    - target: {fileID: 7917785021890764627, guid: 4a16e30c3c7827240aa150cd6e333e81, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a16e30c3c7827240aa150cd6e333e81, type: 3}
