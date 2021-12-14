@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rBody;
     private bool isGrounded = false;
     private Animator anim;
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
     Color playerColor;
     int i = 0;
     public Sprite [] playerSprites;
@@ -222,7 +222,14 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+        if (isFacingRight)
+        {
+            Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(new Vector3(-1, 0, 0)));
+        }
+        if (!isFacingRight)
+        {
+            Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(new Vector3(1, 0, 0)));
+        }
         //bullet.GetComponent<Rigidbody2D>().velocity = this.transform.forward * bulletSpeed;
 
         //GameObject bulletInstance = Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(new Vector3(0, 0, 1)));

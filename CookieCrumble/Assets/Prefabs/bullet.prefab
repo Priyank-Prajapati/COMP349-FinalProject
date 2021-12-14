@@ -127,6 +127,7 @@ MonoBehaviour:
   speed: 20
   damage: 40
   rb: {fileID: 0}
+  player: {fileID: 0}
 --- !u!50 &-6482089192748013797
 Rigidbody2D:
   serializedVersion: 4

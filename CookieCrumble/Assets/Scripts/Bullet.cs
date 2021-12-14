@@ -7,15 +7,36 @@ public class Bullet : MonoBehaviour
 	public float speed = 20f;
 	public int damage = 40;
 	public Rigidbody2D rb;
+	PlayerController playerController;
+	public GameObject player;
+
 
 	// Use this for initialization
 	void Start()
 	{
+		player = GameObject.FindGameObjectWithTag("Player");
+		playerController = player.GetComponent<PlayerController>();
 		rb = this.GetComponent<Rigidbody2D>();
-		rb.velocity = transform.right * speed;
+		if (playerController.isFacingRight)
+        {
+			rb.velocity = Vector3.right * speed;
+        }
+		if (!playerController.isFacingRight)
+        {
+			rb.velocity = Vector3.left * speed;
+		}
+		
+	}
+    void Update()
+    {
+		if (this.transform.position.x <= -30)
+		{
+			Destroy(this.gameObject);
+		}
+
 	}
 
-	void OnTriggerEnter2D(Collider2D hitInfo)
+    void OnTriggerEnter2D(Collider2D hitInfo)
 	{
         var hit = hitInfo.gameObject;
         if (hit.tag == "enemy")
@@ -26,6 +47,7 @@ public class Bullet : MonoBehaviour
         {
 			Destroy(this.gameObject);
         }
+		
        
     }
 
