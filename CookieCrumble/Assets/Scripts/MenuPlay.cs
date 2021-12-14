@@ -10,4 +10,14 @@ public class MenuPlay : MonoBehaviour
         ScoreCounter.scoreValue = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+
+    public void RestartLevel()
+    {
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+    }
+
+
 }
