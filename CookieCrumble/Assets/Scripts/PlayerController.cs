@@ -152,7 +152,16 @@ public class PlayerController : MonoBehaviour
             {
                 audio.PlayOneShot(completeSound);
                 StartCoroutine(WaitAndLoadScene());
-                //if (scene_number==2)
+                if (scene_number==5)
+                {
+                    SceneManager.LoadScene(7);
+                    
+                }
+                else
+                {
+                    scene_number++;
+                    SceneManager.LoadScene(scene_number);
+                }
                 //SceneManager.LoadScene(scene_number);
                 //else
                 //{
@@ -272,7 +281,9 @@ public class PlayerController : MonoBehaviour
 
     public void RestartLevel()
     {
-        LivesSystem.life = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LivesSystem.life = 3;
+        ScoreCounter.scoreValue = 0;
     }
 
 
