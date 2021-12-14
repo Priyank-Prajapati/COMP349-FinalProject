@@ -124,6 +124,12 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             ScoreCounter.scoreValue = ScoreCounter.scoreValue + 1;
+            if (health != 1)
+            {
+                health += 0.25f;
+                healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+            }
+          
             audio.PlayOneShot(cakeSound);
         }
         if (collision.gameObject.CompareTag("key"))
