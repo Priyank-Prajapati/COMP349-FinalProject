@@ -18,11 +18,12 @@ TagManager:
   - vanillaBlock
   - border
   - vert
+  - bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
   - Ground

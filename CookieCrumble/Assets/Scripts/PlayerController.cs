@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     public bool onVertPlatform;
     public static string color;
     int  scene_number;
+    public GameObject bullet;
+    public Transform bulletSpawn;
+    public float bulletSpeed = 30;
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -39,6 +42,14 @@ public class PlayerController : MonoBehaviour
         playerSpriteRenderer = GetComponent<SpriteRenderer>().sprite;
         scene_number = SceneManager.GetActiveScene().buildIndex;
         
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -73,8 +84,12 @@ public class PlayerController : MonoBehaviour
                 color = "Brown";
             }
         }
-            //check if on ground
-            isGrounded = GroundCheck();
+
+
+      
+
+        //check if on ground
+        isGrounded = GroundCheck();
         //jump code
         if (isGrounded && Input.GetAxis("Jump") > 0)
         {
@@ -203,5 +218,16 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(0);
+    }
+
+    void Shoot()
+    {
+        //Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
+        //bullet.GetComponent<Rigidbody2D>().velocity = this.transform.forward * bulletSpeed;
+
+        GameObject bulletInstance = Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(new Vector3(0, 0, 1)));
+        bulletInstance.GetComponent<Rigidbody2D>().velocity = transform.forward * 30;
+
+        Physics2D.IgnoreCollision(bulletInstance.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 }
