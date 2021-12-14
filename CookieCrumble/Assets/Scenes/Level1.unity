@@ -272,7 +272,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -557,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 624996767439548114, guid: 315f355e31020cd4e9810d6e52f2921f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.4143386
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 624996767439548114, guid: 315f355e31020cd4e9810d6e52f2921f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7357,7 +7357,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 258246417
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7448,8 +7448,10 @@ MonoBehaviour:
   completeSound: {fileID: 8300000, guid: 93571bf208234da42b23fea75b28a96e, type: 3}
   colorSwapsound: {fileID: 8300000, guid: bd5c4792218311f4aa3105e3e488e933, type: 3}
   keySound: {fileID: 8300000, guid: 204e2feb41178d348a06a295dc0f6c5a, type: 3}
+  shootSound: {fileID: 8300000, guid: eaac98c2e5f05c04fbf2c4195f5b075d, type: 3}
   audio: {fileID: 0}
   playerSpriteRenderer: {fileID: 0}
+  isFacingRight: 1
   playerSprites:
   - {fileID: 21300000, guid: 16dfd0065b5458844b52c6457e37428b, type: 3}
   - {fileID: 21300000, guid: 262fa0a8ea3973f4e81a0e8ff1d986c6, type: 3}
@@ -7836,7 +7838,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0080214, y: 1}
+    m_SensorSize: {x: 1.7602524, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10434,7 +10436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 624996767439548114, guid: 315f355e31020cd4e9810d6e52f2921f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.4143386
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 624996767439548114, guid: 315f355e31020cd4e9810d6e52f2921f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10661,7 +10663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 624996767439548114, guid: 315f355e31020cd4e9810d6e52f2921f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.4143386
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 624996767439548114, guid: 315f355e31020cd4e9810d6e52f2921f, type: 3}
       propertyPath: m_LocalRotation.w

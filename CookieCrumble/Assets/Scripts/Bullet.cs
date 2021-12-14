@@ -9,14 +9,17 @@ public class Bullet : MonoBehaviour
 	public Rigidbody2D rb;
 	PlayerController playerController;
 	public GameObject player;
-
+	public AudioClip explosionSound;
+	public AudioSource audio;
 
 	// Use this for initialization
 	void Start()
 	{
+		audio = this.GetComponent<AudioSource>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerController = player.GetComponent<PlayerController>();
 		rb = this.GetComponent<Rigidbody2D>();
+		
 		if (playerController.isFacingRight)
         {
 			rb.velocity = Vector3.right * speed;
@@ -38,10 +41,12 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
 	{
-        var hit = hitInfo.gameObject;
+		//audio.PlayOneShot(explosionSound);
+		var hit = hitInfo.gameObject;
         if (hit.tag == "enemy")
         {
-			Destroy(hit);
+			
+			//Destroy(hit);
         }
 		if (hit.tag != "coin")
         {
@@ -51,4 +56,5 @@ public class Bullet : MonoBehaviour
        
     }
 
+	
 }

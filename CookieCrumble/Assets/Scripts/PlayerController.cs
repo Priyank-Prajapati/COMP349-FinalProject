@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPos; //ground check overlapcircle position
     [SerializeField] private float groundCheckRadius; //ground check overlapcircle radius
     [SerializeField] private LayerMask whatIsGround; //ground Layer Mask
-    public AudioClip cakeSound,deadSound, jumpSound, completeSound, colorSwapsound, keySound;
+    public AudioClip cakeSound,deadSound, jumpSound, completeSound, colorSwapsound, keySound, shootSound;
     public AudioSource audio;
     bool hasKey=false;
     Transform playerDefaultPostition;
@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            audio.PlayOneShot(shootSound);
             Shoot();
         }
     }

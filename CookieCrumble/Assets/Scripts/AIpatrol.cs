@@ -12,8 +12,12 @@ public class AIpatrol : MonoBehaviour
     public Transform groundCheckPos;
     public LayerMask groundLayer;
     public Collider2D bodyCollider;
+    public AudioClip explosionSound;
+    public AudioSource audio;
+
     void Start()
     {
+        audio = this.GetComponent<AudioSource>();
         mustPatrol = true;
         walkSpeed = 50;
     }
@@ -52,5 +56,26 @@ public class AIpatrol : MonoBehaviour
         mustPatrol = true;
         
     }
-    
+
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        //audio.PlayOneShot(explosionSound);
+        var hit = hitInfo.gameObject;
+        if (hit.tag == "bullet")
+        {
+            Debug.Log("HEREERERERRERE");
+            StartCoroutine(death());
+            //audio.PlayOneShot(explosionSound);
+        }
+
+    }
+
+    IEnumerator death()
+    {
+        audio.PlayOneShot(explosionSound);
+        yield return new WaitForSeconds(1f);
+
+        Destroy(this.gameObject);
+    }
+
 }
