@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public Transform bulletSpawn;
     public float bulletSpeed = 30;
+
+    public const int maxHealth = 1;
+    public float health = maxHealth;
+
+    public RectTransform healthBar;
+
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -148,6 +154,8 @@ public class PlayerController : MonoBehaviour
             audio.PlayOneShot(deadSound);
             LivesSystem.life = LivesSystem.life - 1;
             rBody.position = pos;
+            health = maxHealth;
+            healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
         }
         if (collision.gameObject.CompareTag("pink"))
         {
@@ -207,10 +215,19 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("enemy"))
         {
             color = "";
-            audio.PlayOneShot(deadSound);
-            LivesSystem.life = LivesSystem.life - 1;
-            this.GetComponent<SpriteRenderer>().sprite=playerSpriteRenderer;
-            rBody.position = pos;
+            health -= 0.25f;
+            Debug.Log(health);
+            healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+            if (health <= 0)
+            {
+                audio.PlayOneShot(deadSound);
+                LivesSystem.life = LivesSystem.life - 1;
+                this.GetComponent<SpriteRenderer>().sprite=playerSpriteRenderer;
+                rBody.position = pos;
+                health = maxHealth;
+                healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+            }
+                
             //Application.LoadLevel(Application.loadedLevel);
         }
     }
