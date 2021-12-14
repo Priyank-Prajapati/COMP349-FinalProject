@@ -57,6 +57,17 @@ public class PlayerController : MonoBehaviour
             audio.PlayOneShot(shootSound);
             Shoot();
         }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (health != 1)
+            {
+                ScoreCounter.scoreValue = ScoreCounter.scoreValue - 1;
+                audio.PlayOneShot(cakeSound);
+                health += 0.25f;
+                healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+            }
+
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -92,11 +103,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+       
 
-      
 
-        //check if on ground
-        isGrounded = GroundCheck();
+            //check if on ground
+            isGrounded = GroundCheck();
         //jump code
         if (isGrounded && Input.GetAxis("Jump") > 0)
         {
@@ -124,11 +135,6 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             ScoreCounter.scoreValue = ScoreCounter.scoreValue + 1;
-            if (health != 1)
-            {
-                health += 0.25f;
-                healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
-            }
           
             audio.PlayOneShot(cakeSound);
         }
