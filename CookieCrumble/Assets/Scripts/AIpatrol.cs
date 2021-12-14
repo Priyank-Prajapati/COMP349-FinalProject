@@ -86,9 +86,14 @@ public class AIpatrol : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
-            Debug.Log("BRUH");
             mustTurn = true;
             Flip();
+        }
+
+
+        if (collision.gameObject.name == "StrawberryTripleBlockDeath")
+        {
+            StartCoroutine(instantdeath());
         }
     }
 
@@ -96,6 +101,13 @@ public class AIpatrol : MonoBehaviour
     {
         audio.PlayOneShot(explosionSound);
         yield return new WaitForSeconds(0.3f);
+
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator instantdeath()
+    {
+        yield return new WaitForSeconds(0.05f);
 
         Destroy(this.gameObject);
     }
