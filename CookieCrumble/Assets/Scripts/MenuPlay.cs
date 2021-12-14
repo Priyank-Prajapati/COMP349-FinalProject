@@ -9,7 +9,7 @@ public class MenuPlay : MonoBehaviour
    public void PlayGame()
     {
         ScoreCounter.scoreValue = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(3);
     }
 
 
@@ -22,7 +22,7 @@ public class MenuPlay : MonoBehaviour
 
     public void LOAD_SCENE(string SceneName)
     {
-        //Debug.Log(SceneName);
+        Debug.Log(SceneName);
         SceneManager.LoadScene(SceneName);
     }
 
