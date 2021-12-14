@@ -15,6 +15,11 @@ public class AIpatrol : MonoBehaviour
     public AudioClip explosionSound;
     public AudioSource audio;
 
+    public const int maxHealth = 1;
+    public float health = maxHealth;
+
+    public RectTransform healthBar;
+
     void Start()
     {
         audio = this.GetComponent<AudioSource>();
@@ -59,13 +64,19 @@ public class AIpatrol : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        //audio.PlayOneShot(explosionSound);
         var hit = hitInfo.gameObject;
         if (hit.tag == "bullet")
         {
             Debug.Log("HEREERERERRERE");
-            StartCoroutine(death());
-            //audio.PlayOneShot(explosionSound);
+            health-=0.25f;
+            Debug.Log(health);
+            healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+            Debug.Log(health);
+            if (health <= 0)
+            {
+                StartCoroutine(death());
+            }
+            
         }
 
     }
