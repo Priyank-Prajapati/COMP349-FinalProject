@@ -222,12 +222,12 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        //Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
+        Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
         //bullet.GetComponent<Rigidbody2D>().velocity = this.transform.forward * bulletSpeed;
 
-        GameObject bulletInstance = Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(new Vector3(0, 0, 1)));
-        bulletInstance.GetComponent<Rigidbody2D>().velocity = transform.forward * 30;
+        //GameObject bulletInstance = Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(new Vector3(0, 0, 1)));
+        //bulletInstance.GetComponent<Rigidbody2D>().velocity = transform.forward * 30;
 
-        Physics2D.IgnoreCollision(bulletInstance.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //Physics2D.IgnoreCollision(bulletInstance.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 }
