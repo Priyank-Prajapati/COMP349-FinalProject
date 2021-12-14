@@ -15,4 +15,18 @@ public class Bullet : MonoBehaviour
 		rb.velocity = transform.right * speed;
 	}
 
+	void OnTriggerEnter2D(Collider2D hitInfo)
+	{
+        var hit = hitInfo.gameObject;
+        if (hit.tag == "enemy")
+        {
+			Destroy(hit);
+        }
+		if (hit.tag != "coin")
+        {
+			Destroy(this.gameObject);
+        }
+       
+    }
+
 }
