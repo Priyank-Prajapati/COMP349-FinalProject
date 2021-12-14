@@ -81,10 +81,10 @@ public class platformController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
           
+          
             if (PlayerController.color == color)
             {
                 this.GetComponent<Collider2D>().isTrigger = false;
-                c = true;
             }
         }
     }

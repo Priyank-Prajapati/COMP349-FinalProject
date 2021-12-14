@@ -101,14 +101,14 @@ public class AIpatrol : MonoBehaviour
     {
         audio.PlayOneShot(explosionSound);
         yield return new WaitForSeconds(0.3f);
-
+        ScoreCounter.scoreValue = ScoreCounter.scoreValue + 1;
         Destroy(this.gameObject);
     }
 
     IEnumerator instantdeath()
     {
         yield return new WaitForSeconds(0.05f);
-
+        ScoreCounter.scoreValue = ScoreCounter.scoreValue + 1;
         Destroy(this.gameObject);
     }
 

@@ -215,13 +215,6 @@ public class PlayerController : MonoBehaviour
 
         isFacingRight = !isFacingRight;
     }
-    IEnumerator ColorChange()
-    {
-        yield return new WaitForSeconds(3);
-        Debug.Log("i");
-    
-
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("enemy"))
