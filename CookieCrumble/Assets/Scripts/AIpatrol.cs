@@ -67,7 +67,6 @@ public class AIpatrol : MonoBehaviour
         var hit = hitInfo.gameObject;
         if (hit.tag == "bullet")
         {
-            Debug.Log("HEREERERERRERE");
             health-=0.25f;
             Debug.Log(health);
             healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
@@ -79,6 +78,18 @@ public class AIpatrol : MonoBehaviour
             
         }
 
+       
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            Debug.Log("BRUH");
+            mustTurn = true;
+            Flip();
+        }
     }
 
     IEnumerator death()
