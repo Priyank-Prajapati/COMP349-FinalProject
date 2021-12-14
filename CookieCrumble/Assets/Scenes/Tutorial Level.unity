@@ -7276,6 +7276,7 @@ MonoBehaviour:
   completeSound: {fileID: 8300000, guid: 93571bf208234da42b23fea75b28a96e, type: 3}
   colorSwapsound: {fileID: 8300000, guid: bd5c4792218311f4aa3105e3e488e933, type: 3}
   keySound: {fileID: 8300000, guid: 204e2feb41178d348a06a295dc0f6c5a, type: 3}
+  shootSound: {fileID: 8300000, guid: eaac98c2e5f05c04fbf2c4195f5b075d, type: 3}
   audio: {fileID: 0}
   playerSpriteRenderer: {fileID: 0}
   isFacingRight: 1
@@ -10239,6 +10240,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5863823322275820727, guid: 4a16e30c3c7827240aa150cd6e333e81, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a16e30c3c7827240aa150cd6e333e81, type: 3}
 --- !u!1001 &4268666467849493532
@@ -10255,6 +10260,10 @@ PrefabInstance:
     - target: {fileID: 4268666468648461129, guid: cc35c9076f0e51d4b945767c1c45ed41, type: 3}
       propertyPath: m_Offset.x
       value: 0.0046157837
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268666468648461130, guid: cc35c9076f0e51d4b945767c1c45ed41, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4268666468648461131, guid: cc35c9076f0e51d4b945767c1c45ed41, type: 3}
       propertyPath: m_RootOrder
@@ -10356,6 +10365,10 @@ PrefabInstance:
     - target: {fileID: 5037689318394046256, guid: 275c9177fec935548a6882ae838ac501, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037689318394046257, guid: 275c9177fec935548a6882ae838ac501, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5037689318394046268, guid: 275c9177fec935548a6882ae838ac501, type: 3}
       propertyPath: m_Name
