@@ -27,7 +27,7 @@ public class LivesSystem : MonoBehaviour
         if(life==0)
         {
             Debug.Log(life);
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             life = 3;
             ScoreCounter.scoreValue = 0;
         }

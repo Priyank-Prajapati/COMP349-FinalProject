@@ -240,7 +240,15 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitAndLoadScene()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(0);
+        if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        { 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+        }
+       
     }
 
     void Shoot()
@@ -260,4 +268,13 @@ public class PlayerController : MonoBehaviour
 
         //Physics2D.IgnoreCollision(bulletInstance.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
+
+
+    public void RestartLevel()
+    {
+        LivesSystem.life = 0;
+    }
+
+
+
 }
